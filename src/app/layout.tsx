@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Toaster } from '@/components/ui/sonner'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme/theme'
 import ReactQueryProvider from '@/lib/react-query'
@@ -27,6 +28,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Toaster richColors />
           </ThemeProvider>
         </ReactQueryProvider>
       </body>
