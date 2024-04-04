@@ -11,7 +11,7 @@ interface PaginationProps {
   pageIndex: number
   totalCount: number
   perPage: number
-  onPageChange: (pageIndex: number) => string
+  onPageChange: (pageIndex: number) => Promise<void> | void
 }
 
 export function Pagination({
@@ -25,12 +25,12 @@ export function Pagination({
   return (
     <div className="flex items-center justify-between">
       <span className="text-sm text-muted-foreground">
-        Total of {totalCount} item(s)
+        Total de {totalCount} itens
       </span>
 
       <div className="flex items-center gap-6 lg:gap-8">
         <div className="text-sm font-medium">
-          Page {pageIndex} of {pages}
+          Página {pageIndex} de {pages}
         </div>
 
         <div className="flex items-center gap-2">

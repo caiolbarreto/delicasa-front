@@ -53,12 +53,14 @@ export async function getOrders({
 }: GetOrdersQuery) {
   const response = await api.get<GetOrdersResponse>('/orders', {
     params: {
-      pageIndex,
+      page: pageIndex,
       name,
       cpf,
       status,
     },
   })
+
+  console.log(pageIndex)
 
   return response.data
 }
