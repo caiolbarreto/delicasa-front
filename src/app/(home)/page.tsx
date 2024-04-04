@@ -13,6 +13,7 @@ import { toast } from 'sonner'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { useRouter } from 'next/navigation'
+import { maskCPF, maskCellphone } from '@/lib/utils'
 
 const createAccountSchema = z.object({
   name: z.string().min(1),
@@ -21,25 +22,6 @@ const createAccountSchema = z.object({
 })
 
 type CreateAccountSchema = z.infer<typeof createAccountSchema>
-
-function maskCPF(value: string): string {
-  // Format CPF as 999.999.999-99
-  return value
-    .replace(/\D/g, '') // Remove non-digit characters
-    .slice(0, 11) // Limit to 11 characters (length of CPF)
-    .replace(/(\d{3})(\d)/, '$1.$2') // Add dot after first 3 digits
-    .replace(/(\d{3})(\d)/, '$1.$2') // Add dot after next 3 digits
-    .replace(/(\d{3})(\d{1,2})$/, '$1-$2') // Add dash before last 2 digits
-}
-
-function maskCellphone(value: string): string {
-  // Format cellphone as (99) 99999-9999
-  return value
-    .replace(/\D/g, '') // Remove non-digit characters
-    .slice(0, 11) // Limit to 11 characters (length of cellphone)
-    .replace(/(\d{2})(\d)/, '($1) $2') // Add parenthesis around first 2 digits
-    .replace(/(\d{5})(\d)/, '$1-$2') // Add dash after next 5 digits
-}
 
 export default function SignUp() {
   const router = useRouter()
