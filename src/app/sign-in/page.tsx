@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label'
 import { maskCPF } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
+import { setCookie } from 'nookies'
 import { LogIn } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -14,6 +15,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 
 import { z } from 'zod'
+import { useUser } from '@/context/user-context'
 
 const loginAccountSchema = z.object({
   cpf: z.string().min(1),
@@ -22,6 +24,7 @@ const loginAccountSchema = z.object({
 type LoginAccountSchema = z.infer<typeof loginAccountSchema>
 
 export default function Login() {
+  const { handleSetUser } = useUser()
   const router = useRouter()
 
   const {
@@ -38,8 +41,15 @@ export default function Login() {
 
   async function handleLoginUser(data: LoginAccountSchema) {
     try {
-      await loginUserFn({
+      const response = await loginUserFn({
         cpf: data.cpf,
+      })
+
+      handleSetUser(response)
+
+      setCookie(null, 'user', JSON.stringify(response), {
+        maxAge: 30 * 24 * 60 * 60,
+        path: '/',
       })
 
       router.push('/open-door')

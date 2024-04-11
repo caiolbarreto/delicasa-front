@@ -80,11 +80,7 @@ export function OrderTableFilters() {
         className="h-8 w-[320px]"
         {...register('name')}
       />
-      <Input
-        placeholder="Order ID"
-        className="h-8 w-auto"
-        {...register('cpf')}
-      />
+      <Input placeholder="CPF" className="h-8 w-auto" {...register('cpf')} />
 
       <Controller
         name="status"

@@ -72,7 +72,9 @@ export function OrderDetails({ order, total }: OrderDetailsProps) {
               </TableRow>
 
               <TableRow>
-                <TableCell className="text-muted-foreground">Ordered</TableCell>
+                <TableCell className="text-muted-foreground">
+                  Data do pedido
+                </TableCell>
                 <TableCell className="flex justify-end">
                   {format(order.createdAt, 'dd/MM/yy HH:mm')}
                 </TableCell>
