@@ -46,10 +46,14 @@ export default function SignUp() {
         cellphone: data.cellphone,
       })
 
-      toast.success('Usuário criado!')
+      toast.success('Usuário criado!', {
+        position: 'top-center',
+      })
       router.push('/sign-in')
     } catch (err) {
-      toast.error('CPF já em uso')
+      toast.error('CPF já em uso', {
+        position: 'top-center',
+      })
     }
   }
 

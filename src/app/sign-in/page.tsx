@@ -54,7 +54,9 @@ export default function Login() {
 
       router.push('/open-door')
     } catch (err) {
-      toast.error('Usuário não encontrado')
+      toast.error('Usuário não encontrado', {
+        position: 'top-center',
+      })
     }
   }
 

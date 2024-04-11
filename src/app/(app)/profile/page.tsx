@@ -70,7 +70,9 @@ export default function Profile() {
         position: 'top-center',
       })
     } catch (err) {
-      toast.error('Erro ao salvar as informações')
+      toast.error('Erro ao salvar as informações', {
+        position: 'top-center',
+      })
     }
   }
 
