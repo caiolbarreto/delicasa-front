@@ -14,7 +14,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User>()
 
   function handleSetUser(user: User) {
-    console.log('??', user)
     setUser(user)
   }
 

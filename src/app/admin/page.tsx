@@ -15,12 +15,12 @@ import {
 import { getOrders } from '@/api/getOrders'
 import { OrderTableRow } from './order-table-row'
 import { OrderTableFilters } from './order-table-filters'
-import { parseCookies } from 'nookies'
+// import { parseCookies } from 'nookies'
 
 export default function Admin() {
-  const cookies = parseCookies()
+  // const cookies = parseCookies()
 
-  const user = cookies.user && JSON.parse(cookies.user)
+  // const user = cookies.user && JSON.parse(cookies.user)
 
   const searchParams = useSearchParams()
   const pathname = usePathname()
@@ -50,62 +50,56 @@ export default function Admin() {
 
   return (
     <>
-      {user.isAdmin ? (
-        <div className="mt-16 flex flex-col gap-4 border-muted-foreground px-16">
-          <div className="flex justify-between">
-            <h1 className="text-3xl font-bold tracking-tight text-foreground">
-              Pedidos
-            </h1>
-          </div>
-          <div className="h-full space-y-2.5">
-            <OrderTableFilters />
+      <div className="mt-16 flex flex-col gap-4 border-muted-foreground px-16">
+        <div className="flex justify-between">
+          <h1 className="text-3xl font-bold tracking-tight text-foreground">
+            Pedidos
+          </h1>
+        </div>
+        <div className="h-full space-y-2.5">
+          <OrderTableFilters />
 
-            <div className="rounded-md border">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-[64px]"></TableHead>
-                    <TableHead className="w-[150px]">ID</TableHead>
-                    <TableHead className="w-[150px]">Data</TableHead>
-                    <TableHead className="w-[150px]">Status</TableHead>
-                    <TableHead className="w-[150px]">Cliente</TableHead>
-                    <TableHead className="w-[100px]">CPF</TableHead>
-                    <TableHead className="w-[100px]">Celular</TableHead>
-                    <TableHead className="w-[50px]">Admin</TableHead>
-                    <TableHead className="w-[100px]">Total</TableHead>
-                    <TableHead className="w-[50px]"></TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {result ? (
-                    result.orders.map((order) => {
-                      return <OrderTableRow key={order.id} order={order} />
-                    })
-                  ) : (
-                    <tr>
-                      <td>
-                        <p>loading</p>
-                      </td>
-                    </tr>
-                  )}
-                </TableBody>
-              </Table>
-            </div>
-            {result && (
-              <Pagination
-                pageIndex={result.meta.pageIndex}
-                totalCount={result.meta.totalCount}
-                perPage={result.meta.perPage}
-                onPageChange={handlePagination}
-              />
-            )}
+          <div className="rounded-md border">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-[64px]"></TableHead>
+                  <TableHead className="w-[150px]">ID</TableHead>
+                  <TableHead className="w-[150px]">Data</TableHead>
+                  <TableHead className="w-[150px]">Status</TableHead>
+                  <TableHead className="w-[150px]">Cliente</TableHead>
+                  <TableHead className="w-[100px]">CPF</TableHead>
+                  <TableHead className="w-[100px]">Celular</TableHead>
+                  <TableHead className="w-[50px]">Admin</TableHead>
+                  <TableHead className="w-[100px]">Total</TableHead>
+                  <TableHead className="w-[50px]"></TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {result ? (
+                  result.orders.map((order) => {
+                    return <OrderTableRow key={order.id} order={order} />
+                  })
+                ) : (
+                  <tr>
+                    <td>
+                      <p>loading</p>
+                    </td>
+                  </tr>
+                )}
+              </TableBody>
+            </Table>
           </div>
+          {result && (
+            <Pagination
+              pageIndex={result.meta.pageIndex}
+              totalCount={result.meta.totalCount}
+              perPage={result.meta.perPage}
+              onPageChange={handlePagination}
+            />
+          )}
         </div>
-      ) : (
-        <div className="flex h-screen items-center justify-center">
-          <h1 className="font-semibold">Você não tem acesso a essa página</h1>
-        </div>
-      )}
+      </div>
     </>
   )
 }

@@ -1,6 +1,6 @@
 import { BottomBar } from '@/components/bottom-bar'
 
-export default function AppLayout({
+export default function ProfileLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
